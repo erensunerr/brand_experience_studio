@@ -31,7 +31,7 @@ const App = () => {
       <div className="md:hidden bg-neutral-100 flex items-center justify-center w-[100vw] h-[100vh]">
         <h2 className="text-3xl font-bold text-center">
           This site works better on desktop.
-          
+
         </h2>
       </div>
     </>

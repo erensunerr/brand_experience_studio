@@ -1,21 +1,30 @@
+import { motion } from 'framer-motion'
+import {useState, } from 'react';
+
 import './banner.css'
 import Image from './Image'
 import {images} from './Loader'
-import { motion } from 'framer-motion'
 
+// variants
 
 const Banner = () => {
+
   return (
-    <section className="container mx-auto mt-24 space-y-8 p-6">
-      <div className="flex items-center justify-between">
+    <motion.section
+      className="container mx-auto mt-24 space-y-8 p-6"
+    >
+      <motion.div
+        className="flex items-center justify-between"
+
+      >
         <h2 className="text-8xl font-semibold">brand</h2>
 
-        <p className="w-64 text-sm font-semibold mr-[25%]">
+        <motion.p className="w-64 text-sm font-semibold mr-[25%]">
           We are specialised in constructing the foundations of your brand and
           setting you up for success.
-        </p>
+        </motion.p>
 
-      </div>
+      </motion.div>
       <h2 className="text-8xl font-semibold animate-[marquee_5s_infinite_linear]">experience</h2>
       <h2 className="text-8xl font-semibold translate-x-[50%]">studio</h2>
       <div className="flex">
@@ -28,7 +37,7 @@ const Banner = () => {
         <Image {...images[1]} />
 
       </motion.div>
-    </section>
+    </motion.section>
   )
 }
 

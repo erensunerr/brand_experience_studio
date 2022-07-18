@@ -104,7 +104,14 @@ const Loader = ({setLoading}) => {
       <motion.div
         className="absolute max-w-[80%] w-[250px] left-[10%] top-[35%] sm:w-[30%] sm:left-[35%] top-[27%] z-20"
         variants={itemMain}
-        layoutId="image-main-1">
+        layoutId="image-main-1"
+        transition={
+          {
+            ease: [0.6, 0.01, -0.05, .9],
+            duration: 1.6
+          }
+        }
+        >
         <Image src={images[1].src}/>
       </motion.div>
 
