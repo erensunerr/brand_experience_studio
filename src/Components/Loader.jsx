@@ -1,4 +1,7 @@
-import Image from './Image'
+import {useEffect} from 'react';
+import { motion } from 'framer-motion';
+
+import Image from './Image';
 
 const imageInfo = [
   {
@@ -31,34 +34,111 @@ export const images = imageInfo.map(({id, ...others}) =>
   })
 )
 
-const Loader = () => {
-  console.log(images)
+// variants
+
+const container = {
+  show: {
+    transition: {
+      staggerChildren: 0.35,
+    }
+  }
+}
+
+const item = {
+  hidden: {
+    opacity: 0,
+    y: 200,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [.6, -.01, -.05, .95],
+      duration: 1.6,
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -200,
+    transition: {
+      ease: 'easeInOut',
+      duration: .8,
+    }
+  }
+
+}
+
+const itemMain = {
+  hidden: {
+    opacity: 0,
+    y: 200,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: [.6, -.01, -.05, .95],
+      duration: 1.6,
+    }
+  }
+}
+
+const Loader = ({setLoading}) => {
   return (
-    <section className="fixed h-full container mx-auto w-full inset-0">
+    <motion.section
+      className="fixed h-full container mx-auto w-full inset-0"
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      onAnimationComplete={
+        () => setLoading(false)
+      }
+    >
 
-      <div className="absolute w-[160px] sm:w-[30%] left-[16%] bottom-[20%] md:bottom-[5%] z-50">
-        <Image src={images[0].src}/>
-      </div>
+      <ImageBlock
+        className="absolute w-[160px] sm:w-[30%] left-[16%] bottom-[20%] md:bottom-[5%] z-50"
+        img={images[0]}
+      />
 
-      <div className="absolute max-w-[80%] w-[250px] left-[10%] top-[35%] sm:w-[30%] sm:left-[35%] top-[27%] z-20">
+      <motion.div
+        className="absolute max-w-[80%] w-[250px] left-[10%] top-[35%] sm:w-[30%] sm:left-[35%] top-[27%] z-20"
+        variants={itemMain}
+        layoutId="image-main-1">
         <Image src={images[1].src}/>
-      </div>
+      </motion.div>
 
-      <div className="absolute w-[100px] sm:w-[30%] right-[12%] top-[8%]">
-        <Image src={images[2].src}/>
-      </div>
+      <ImageBlock
+        className="absolute w-[100px] sm:w-[30%] right-[12%] top-[8%]"
+        img={images[2]}
+      />
+      <ImageBlock
+        className="absolute w-[40%] right-[10%] bottom-[5%]"
+        img={images[3]}
+      />
+      <ImageBlock
+        className="absolute w-[20%] left-[14%] top-[12%]"
+        img={images[4]}
+      />
 
-      <div className="absolute w-[40%] right-[10%] bottom-[5%]">
-        <Image src={images[3].src}/>
-      </div>
-
-      <div className="absolute w-[20%] left-[14%] top-[12%]">
-        <Image src={images[4].src}/>
-      </div>
-
-
-    </section>
+    </motion.section>
   )
 }
+
+export const ImageBlock = ({img, ...others}) => (
+  <motion.div
+    variants={item}
+    animate={{
+      scale: .5,
+      transition: {
+        duration: 1,
+      }
+    }
+    }
+    {...others}
+  >
+    <Image {...img}/>
+  </motion.div>
+)
 
 export default Loader

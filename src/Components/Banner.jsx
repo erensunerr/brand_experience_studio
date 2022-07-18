@@ -1,6 +1,7 @@
 import './banner.css'
 import Image from './Image'
 import {images} from './Loader'
+import { motion } from 'framer-motion'
 
 
 const Banner = () => {
@@ -20,10 +21,13 @@ const Banner = () => {
       <div className="flex">
         <p className="rounded-full inline-flex items-center ml-[10%] p-4 w-24 h-24 text-center bg-neutral-900 text-neutral-100 font-semibold">scroll down</p>
       </div>
-      <div className="relative px-6 top-[-72px] z-[-10]">
+      <motion.div
+        className="relative px-6 top-[-72px] z-[-10]"
+        layoutId="image-main-1"
+      >
         <Image {...images[1]} />
 
-      </div>
+      </motion.div>
     </section>
   )
 }
